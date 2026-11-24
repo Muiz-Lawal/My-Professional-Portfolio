@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: muiz-lawal-portfolio
+    runtime: node
+    plan: starter
+    buildCommand: npm ci && npm run build
+    startCommand: node server/contact-server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5057
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATA_DIR
+        value: /var/data
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD_HASH
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+    disk:
+      name: portfolio-data
+      mountPath: /var/data
+      sizeGB: 1

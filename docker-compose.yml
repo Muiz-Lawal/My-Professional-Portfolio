@@ -1,0 +1,25 @@
+services:
+  portfolio:
+    build: .
+    ports:
+      - "5057:5057"
+    environment:
+      NODE_ENV: production
+      PORT: 5057
+      HOST: 0.0.0.0
+      DATA_DIR: /app/data
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5057}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      ADMIN_PASSWORD_HASH: ${ADMIN_PASSWORD_HASH:-}
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      CONTACT_RECIPIENT: ${CONTACT_RECIPIENT:-}
+      CONTACT_FROM: ${CONTACT_FROM:-}
+      SITE_URL: ${SITE_URL:-}
+      VITE_SITE_URL: ${VITE_SITE_URL:-}
+    volumes:
+      - portfolio-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  portfolio-data:
